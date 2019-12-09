@@ -1,0 +1,303 @@
+$white: #fff;
+$white-smoke: #f8f8f8;
+$gray-light: #eee;
+$gray: #777;
+$black: #151515;
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba($black, .3);
+  border-radius: 8px;
+  background-color: $white-smoke;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: $white-smoke;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #5e5e5e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #444;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 1.6rem;
+}
+
+h2,
+p {
+  padding: 1.5rem;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+  box-shadow: 0 1rem 1rem -.5rem $gray;
+  background-color: #d7dee3;
+  z-index: 1000;
+}
+
+.hidden-checkbox {
+  display: none;
+}
+
+.logo {
+  margin-left: 9rem;
+  padding: 0;
+  color: $white;
+  font-size: 4rem;
+  line-height: 5rem;
+  text-shadow: 1px 1px $black;
+}
+
+.menu-open-btn {
+  position: absolute;
+  top: .8rem;
+  left: 2.5rem;
+  width: 4rem;
+  height: 2.7rem;
+  cursor: pointer;
+
+  span,
+  span:before,
+  span:after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: lighten($black, 30%);
+  }
+
+  span {
+    top: 50%;
+    height: .5rem;
+  }
+
+  span:before,
+  span:after {
+    content: "";
+    height: 100%;
+  }
+
+  span:before {
+    transform: translateY(-1.1rem);
+  }
+
+  span:after {
+    transform: translateY(1.1rem);
+  }
+}
+
+.overlay {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  .hidden-checkbox:checked + & {
+    display: block;
+    animation: showOverlay .5s ease forwards;
+
+    .menu {
+      transform: none;
+      animation: slideOpen .45s cubic-bezier(.215, .610, .355, 1);
+    }
+  }
+}
+
+.menu {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 37.5rem;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: .8rem 0 1rem -.6rem $gray;
+  background-color: $white;
+}
+
+.menu__header {
+  position: relative;
+  width: 100%;
+  height: 6rem;
+  font-size: 3.2rem;
+  line-height: 6rem;
+  text-align: center;
+  background-color: #c3d7e5;
+
+  h3 {
+    color: $white;
+    font-size: 3.6rem;
+    text-shadow: 1px 1px $black;
+  }
+}
+
+.scrollable-area {
+  height: calc(100% - 6rem);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.nav {
+  margin: 0;
+  padding: 2rem;
+  list-style: none;
+
+  li {
+    border-bottom: 1px solid $gray-light;
+
+    a {
+      display: block;
+      padding: 1rem 2rem;
+      color: #151515;
+      font-size: 2rem;
+      text-decoration: none;
+    }
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  margin-top: -1.5rem;
+  font-size: 2rem;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.content {
+  width: 100%;
+  max-width: 98rem;
+  margin: 6rem auto 2rem auto;
+  padding: 0 1rem;
+}
+
+// Text placeholder //
+.text-placeholder {
+  position: relative;
+  width: 100%;
+  margin-top: 5rem;
+  padding: 2rem;
+
+  &__header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__header-content {
+    width: 100%;
+    margin-left: 2rem;
+
+    .content-shape {
+      &:first-child {
+        width: 85%;
+      }
+
+      &:nth-child(2) {
+        width: 65%;
+      }
+    }
+  }
+
+  &__footer {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  &__footer-content {
+    width: 100%;
+    height: 100%;
+    min-height: 2rem;
+
+    .content-shape {
+      &:first-child {
+        width: 40%;
+      }
+
+      &:nth-child(2) {
+        width: 30%;
+      }
+    }
+  }
+}
+
+.content-shape {
+  height: 1.2rem;
+  margin-bottom: 1rem;
+  background: $gray-light;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 25rem;
+  margin-top: 2rem;
+  background: $gray-light;
+}
+
+.avatar-placeholder {
+  width: 6rem;
+  min-width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: $gray-light;
+}
+
+@keyframes slideOpen {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes showOverlay {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(black, .3);
+  }
+}
