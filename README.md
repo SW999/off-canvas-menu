@@ -1,6 +1,7 @@
 # Pure CSS off-canvas menu in an overlay with a prevented scroll on the body
 
 [DEMO](https://sw999.github.io/projects/off-canvas-menu)
+
 ![screen](https://user-images.githubusercontent.com/3176886/70501235-90341780-1b2e-11ea-84b5-a9b4a3753a44.gif)
 
 ## Explanation
