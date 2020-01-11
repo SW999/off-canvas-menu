@@ -1,8 +1,9 @@
-$white: #fff;
-$white-smoke: #f8f8f8;
-$gray-light: #eee;
-$gray: #777;
-$black: #151515;
+$white:          #fff;
+$gray-light:     #eee;
+$header-bg:      #d7dee3;
+$header-menu-bg: #c3d7e5;
+$gray:           #777;
+$black:          #151515;
 
 *,
 ::before,
@@ -15,21 +16,21 @@ $black: #151515;
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba($black, .3);
   border-radius: 8px;
-  background-color: $white-smoke;
+  background-color: darken($white, 5%);
 }
 
 ::-webkit-scrollbar {
   width: 6px;
-  background-color: $white-smoke;
+  background-color: darken($white, 5%);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: #5e5e5e;
+  background-color: darken($gray, 10%);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #444;
+  background-color: darken($gray, 15%);
 }
 
 html,
@@ -44,6 +45,8 @@ html {
 body {
   font-family: sans-serif;
   font-size: 1.6rem;
+  opacity: 0;
+  animation: loadingAnimation .1s ease-in .3s forwards;
 }
 
 h2,
@@ -57,7 +60,7 @@ header {
   width: 100%;
   height: 5rem;
   box-shadow: 0 1rem 1rem -.5rem $gray;
-  background-color: #d7dee3;
+  background-color: $header-bg;
   z-index: 1000;
 }
 
@@ -94,53 +97,54 @@ header {
   span {
     top: 50%;
     height: .5rem;
-  }
 
-  span:before,
-  span:after {
-    content: "";
-    height: 100%;
-  }
+    &:before,
+    &:after {
+      content: "";
+      height: 100%;
+    }
 
-  span:before {
-    transform: translateY(-1.1rem);
-  }
+    &:before {
+      transform: translateY(-1.1rem);
+    }
 
-  span:after {
-    transform: translateY(1.1rem);
-  }
-}
-
-.overlay {
-  display: none;
-  z-index: 100;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  .hidden-checkbox:checked + & {
-    display: block;
-    animation: showOverlay .5s ease forwards;
-
-    .menu {
-      transform: none;
-      animation: slideOpen .45s cubic-bezier(.215, .610, .355, 1);
+    &:after {
+      transform: translateY(1.1rem);
     }
   }
 }
 
 .menu {
-  top: 0;
-  bottom: 0;
-  left: 0;
   width: 100%;
   max-width: 37.5rem;
   height: 100%;
   overflow: hidden;
   box-shadow: .8rem 0 1rem -.6rem $gray;
   background-color: $white;
+  transform: translateX(-100%);
+  transition: transform .3s cubic-bezier(.215, .610, .355, 1);
+}
+
+.overlay {
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: all .45s ease;
+
+  .hidden-checkbox:checked ~ & {
+    pointer-events: auto;
+    background-color: rgba($black, .35);
+
+    .menu {
+      transform: none;
+      animation: slideOpen .45s cubic-bezier(.215, .610, .355, 1);
+    }
+  }
 }
 
 .menu__header {
@@ -150,7 +154,7 @@ header {
   font-size: 3.2rem;
   line-height: 6rem;
   text-align: center;
-  background-color: #c3d7e5;
+  background-color: $header-menu-bg;
 
   h3 {
     color: $white;
@@ -171,12 +175,12 @@ header {
   list-style: none;
 
   li {
-    border-bottom: 1px solid $gray-light;
+    border-bottom: thin solid $gray-light;
 
     a {
       display: block;
       padding: 1rem 2rem;
-      color: #151515;
+      color: $black;
       font-size: 2rem;
       text-decoration: none;
     }
@@ -209,7 +213,7 @@ header {
   padding: 0 1rem;
 }
 
-// Text placeholder //
+/* Text placeholder */
 .text-placeholder {
   position: relative;
   width: 100%;
@@ -293,11 +297,11 @@ header {
   }
 }
 
-@keyframes showOverlay {
+@keyframes loadingAnimation { // To hide menu flashing on page load
   0% {
-    background-color: transparent;
+    opacity: 0;
   }
   100% {
-    background-color: rgba(black, .3);
+    opacity: 1;
   }
 }
